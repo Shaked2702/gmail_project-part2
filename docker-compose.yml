@@ -1,0 +1,29 @@
+services:
+  server_container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: proj_ex2
+    container_name: server_container
+    networks:
+      - my_net
+    stdin_open: true
+    tty: true
+
+  client_container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: proj_ex2
+    container_name: client_container
+    networks:
+      - my_net
+    stdin_open: true
+    tty: true
+    depends_on:
+      - server_container
+
+networks:
+  my_net:
+    name: my_net
+    driver: bridge
